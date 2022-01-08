@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -19,6 +18,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Header from './Header'
+import {Link } from 'react-router-dom'
 
 interface Post {
   Title: string,
@@ -37,6 +37,7 @@ export default function Newsfeed() {
       // handle success
       setPosts(response.data)
     })
+    setIsLoading(false)
   }, [])
 
   return (
@@ -47,6 +48,7 @@ export default function Newsfeed() {
           console.log(post)
           return (
             <Grid item xs={12} md={6} key={post.ID} >
+              <Link to={`/post/${post.ID}`}>
             <CardActionArea component="a" href="#">
               <Card sx={{ display: 'flex' }}>
                 <CardContent sx={{ flex: 1 }}>
@@ -66,6 +68,7 @@ export default function Newsfeed() {
                 />
               </Card>
             </CardActionArea>
+            </Link>
           </Grid>
           )
         })
