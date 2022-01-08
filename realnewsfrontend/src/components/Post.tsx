@@ -11,6 +11,13 @@ interface Post {
     ID: number;
 }
 
+export default function SelectedPost(props: any) {
+  console.log(props)
+  return (
+    <p>hiiiii</p>
+  )
+}
+
 // export default function MainFeaturedPost() {
 //   let [isLoading, setIsLoading] = useState(false);
 //   let [post, setPost] = useState<Post>()
