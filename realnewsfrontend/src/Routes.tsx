@@ -6,8 +6,8 @@ import SelectedPost from "./components/Post";
 export default function RouteList() {
   return (
     <Routes>
-      <Route path="/post/:postId" element={SelectedPost}/>
-      <Route path="/posts" element={Newsfeed()} />
+      <Route path="/post/:ID" element={< SelectedPost />} />
+      <Route path="/posts" element={<Newsfeed />} />
     </Routes>
   )
 }

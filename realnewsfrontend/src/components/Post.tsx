@@ -1,20 +1,22 @@
 import React, {useState, useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 
-interface Post {
-    Text: string;
-    Title: string;
-    ID: number;
-}
+// interface Post {
+//     Text: string;
+//     Title: string;
+//     ID: number;
+// }
 
-export default function SelectedPost(props: any) {
-  console.log(props)
+export default function SelectedPost() {
+  const { ID } = useParams();
+  console.log('this is params', ID)
   return (
-    <p>hiiiii</p>
+    <p>hiiii</p>
   )
 }
 
