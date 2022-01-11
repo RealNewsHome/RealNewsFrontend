@@ -32,7 +32,6 @@ export default function SelectedPost() {
   if(isLoading) {
     return <div/>
   } else {
-    console.log("POST", post)
   return (
         <Paper
           sx={{
