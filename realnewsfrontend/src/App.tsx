@@ -1,14 +1,23 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import SignUp from './components/SignUp'
-import Newsfeed from './components/Newsfeed';
-import Routes from './Routes'
 import RouteList from './Routes';
+import Header from './components/Header';
+import {AuthContext} from './context'
+// export default function App(){
+//    return (
+//        <AuthContext.Provider>
+//           <Authentication/>
+//           <ProtectedResource />
+//        <AuthContext.Provider />
+//    )
+// }
+
 
 function App() {
   return (
     <div className="App">
+      <Header />
       <RouteList />
     </div>
   );

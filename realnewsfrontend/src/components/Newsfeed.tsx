@@ -17,7 +17,6 @@ import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Header from './Header'
 import {Link } from 'react-router-dom'
 
 interface Post {
@@ -42,7 +41,6 @@ export default function Newsfeed() {
 
   return (
     <div>
-      <Header/>
       {
         posts.map((post: Post) => {
           console.log(post)
