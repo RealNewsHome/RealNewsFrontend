@@ -13,7 +13,7 @@ export default function RouteList() {
       <Route path="/post/:ID" element={< SelectedPost />} />
       <Route path="/posts" element={<Newsfeed />} />
       <Route path="/posts/byUser/:ID" element={<UserProfile />} />
-      <Route path="/signIn" element={<SignIn />} />
+      {/* <Route path="/signIn" element={<SignIn />} /> */}
       <Route path="/signUp" element={<SignUp />} />
     </Routes>
   )
