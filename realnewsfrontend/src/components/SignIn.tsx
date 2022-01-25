@@ -12,6 +12,8 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 
 function Copyright(props: any) {
   return (
@@ -27,16 +29,43 @@ function Copyright(props: any) {
 }
 
 const theme = createTheme();
+const TOKEN = 'token';
+
 
 const SignInSide: React.FC<{setToken:Object}> = ({setToken}) => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [userId, setUserId] = useState<Number>()
+
+  async function loginThunk(email: FormDataEntryValue | null, password: FormDataEntryValue | null) {
+    let res = await axios.post('http://localhost:8080/auth/login', {email, password})
+    console.log('HERE IS THE RESPONSE', res.data)
+    window.localStorage.setItem(TOKEN, res.data);
+    me()
+  }
+
+  async function me() {
+    const token = window.localStorage.getItem(TOKEN);
+    console.log('token!!!', token)
+    if (token) {
+      const res = await axios.post('/auth/me', {
+        headers: {
+          authorization: token,
+        },
+      });
+      // return dispatch(setAuth(res.data));
+      console.log(res)
+    }
+  }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    let emailData = data.get('email');
+    let password = data.get('password');
+    loginThunk(emailData, password)
   };
 
   return (
@@ -125,6 +154,10 @@ const SignInSide: React.FC<{setToken:Object}> = ({setToken}) => {
       </Grid>
     </ThemeProvider>
   );
+}
+
+SignInSide.propTypes = {
+  setToken: PropTypes.func.isRequired
 }
 
 export default SignInSide;
