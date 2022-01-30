@@ -32,15 +32,14 @@ const theme = createTheme();
 const TOKEN = 'token';
 
 
-const SignInSide: React.FC<{setToken:Object}> = ({setToken}) => {
+const SignInSide: React.FC<{setToken:Object}> = ({setToken} : any) => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState<Number>()
 
   async function loginThunk(email: FormDataEntryValue | null, password: FormDataEntryValue | null) {
     let res = await axios.post('http://localhost:8080/auth/login', {email, password})
-    console.log('HERE IS THE RESPONSE', res.data)
     window.localStorage.setItem(TOKEN, res.data);
     me()
   }
@@ -49,13 +48,18 @@ const SignInSide: React.FC<{setToken:Object}> = ({setToken}) => {
     const token = window.localStorage.getItem(TOKEN);
     console.log('token!!!', token)
     if (token) {
-      const res = await axios.post('/auth/me', {
+      const { data } = await axios.post('http://localhost:8080/auth/me', {}, {
         headers: {
-          authorization: token,
+          "authorization": token,
         },
       });
+
+      setToken(token)
       // return dispatch(setAuth(res.data));
-      console.log(res)
+      //now ... set auth & state for the whole app
+      setUserId(data.ID);
+      setUsername(data.Username);
+      setEmail(data.Email);
     }
   }
 
