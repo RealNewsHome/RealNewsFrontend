@@ -63,7 +63,6 @@ export default function UserProfile() {
     <h3>Here are their posts:</h3>
     {
         posts.map((post: Post) => {
-          console.log(post)
           return (
             <Grid item xs={12} md={6} key={post.ID} >
               <Link to={`/post/${post.ID}`}>

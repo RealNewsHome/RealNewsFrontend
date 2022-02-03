@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -18,6 +18,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import {Link } from 'react-router-dom'
+import {UserContext} from '../context'
 
 interface Post {
   Title: string,
@@ -28,6 +29,9 @@ interface Post {
 export default function Newsfeed() {
   let [isLoading, setIsLoading] = useState(false);
   let [posts, setPosts] = useState<Post[]>([])
+  const token = useContext(UserContext)
+  console.log('HIII i m a token', token)
+
 
   useEffect(() => {
     setIsLoading(true)

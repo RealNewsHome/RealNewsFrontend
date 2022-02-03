@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import RouteList from './Routes';
 import Header from './components/Header';
-import {AuthContext} from './context'
+import { UserContext } from './context'
 import SignInSide from './components/SignIn';
+
+// import { useInRouterContext } from 'react-router-dom';
 // export default function App(){
 //    return (
 //        <AuthContext.Provider>
@@ -16,17 +18,19 @@ import SignInSide from './components/SignIn';
 
 
 function App() {
-  const [token, setToken] = useState<string>();
+  const [token, setToken] = useState("");
 
   if(!token) {
     return <SignInSide setToken={setToken} />
   }
 
   return (
-    <div className="App">
+    <UserContext.Provider value={token}>
+    <div className="App" >
       <Header />
       <RouteList />
     </div>
+    </UserContext.Provider>
   );
 }
 
