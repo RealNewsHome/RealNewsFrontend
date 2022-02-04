@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 //   title: string;
 // }
 
-const Header: React.FC<{setToken : any }> = ({ setToken } : any) => {
+const Header: React.FC<{setToken:Object}> = ({ setToken } : any) => {
 
 
   return (
@@ -63,7 +63,7 @@ const Header: React.FC<{setToken : any }> = ({ setToken } : any) => {
 }
 
 Header.propTypes = {
-  setToken: PropTypes.func
+  setToken: PropTypes.func.isRequired
 }
 
 export default Header
