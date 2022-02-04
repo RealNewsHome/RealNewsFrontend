@@ -4,7 +4,8 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 // interface HeaderProps {
 //   sections: ReadonlyArray<{
@@ -14,7 +15,7 @@ import { Link } from 'react-router-dom'
 //   title: string;
 // }
 
-export default function Header() {
+const Header: React.FC<{setToken : any }> = ({ setToken } : any) => {
 
 
   return (
@@ -37,6 +38,9 @@ export default function Header() {
         <IconButton>
           <SearchIcon />
         </IconButton>
+        <Button variant="outlined" size="small" onClick={() => setToken("")}>
+          Logout
+        </Button>
         <Link to="/signUp">
         <Button variant="outlined" size="small">
           Sign up
@@ -57,3 +61,9 @@ export default function Header() {
     </React.Fragment>
   );
 }
+
+Header.propTypes = {
+  setToken: PropTypes.func
+}
+
+export default Header

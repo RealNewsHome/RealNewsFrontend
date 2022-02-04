@@ -27,7 +27,7 @@ function App() {
   return (
     <UserContext.Provider value={token}>
     <div className="App" >
-      <Header />
+      <Header setToken={setToken}/>
       <RouteList />
     </div>
     </UserContext.Provider>

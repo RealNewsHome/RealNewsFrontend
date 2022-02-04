@@ -46,7 +46,6 @@ const SignInSide: React.FC<{setToken:Object}> = ({setToken} : any) => {
 
   async function me() {
     const token = window.localStorage.getItem(TOKEN);
-    console.log('token!!!', token)
     if (token) {
       const { data } = await axios.post('http://localhost:8080/auth/me', {}, {
         headers: {

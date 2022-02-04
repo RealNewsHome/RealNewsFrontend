@@ -30,8 +30,6 @@ export default function Newsfeed() {
   let [isLoading, setIsLoading] = useState(false);
   let [posts, setPosts] = useState<Post[]>([])
   const token = useContext(UserContext)
-  console.log('HIII i m a token', token)
-
 
   useEffect(() => {
     setIsLoading(true)
@@ -47,7 +45,6 @@ export default function Newsfeed() {
     <div>
       {
         posts.map((post: Post) => {
-          console.log(post)
           return (
             <Grid item xs={12} md={6} key={post.ID} >
               <Link to={`/post/${post.ID}`}>
