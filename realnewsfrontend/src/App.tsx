@@ -20,9 +20,9 @@ import SignInSide from './components/SignIn';
 function App() {
   const [token, setToken] = useState("");
 
-  if(!token) {
-    return <SignInSide setToken={setToken} />
-  }
+  // if(!token) {
+  //   return <SignInSide setToken={setToken} />
+  // }
 
   return (
     <UserContext.Provider value={token}>
