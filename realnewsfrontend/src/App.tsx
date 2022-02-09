@@ -24,6 +24,7 @@ function App() {
   //   return <SignInSide setToken={setToken} />
   // }
 
+  console.log('HOUSTON WE HAVE A TOKEN', token)
   return (
     <UserContext.Provider value={token}>
     <div className="App" >

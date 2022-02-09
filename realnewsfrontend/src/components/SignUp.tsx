@@ -35,9 +35,10 @@ const SignUp: React.FC<{setToken:Object}> = ({setToken} : any) => {
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState<Number>()
 
-  async function loginThunk(email: FormDataEntryValue | null, password: FormDataEntryValue | null) {
-    let res = await axios.post('http://localhost:8080/auth/login', {email, password})
-    window.localStorage.setItem(TOKEN, res.data);
+  async function signUpThunk(username: FormDataEntryValue | null, email: FormDataEntryValue | null, password: FormDataEntryValue | null) {
+    let res = await axios.post('http://localhost:8080/newuser', {username, email, password})
+    let login = await axios.post('http://localhost:8080/auth/login', {email, password})
+    window.localStorage.setItem(TOKEN, login.data);
     me()
   }
 
@@ -63,9 +64,10 @@ const SignUp: React.FC<{setToken:Object}> = ({setToken} : any) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
+    let usernameData = data.get('username')
     let emailData = data.get('email');
     let password = data.get('password');
-    loginThunk(emailData, password)
+    signUpThunk(usernameData, emailData, password)
   };
 
   return (
@@ -103,6 +105,16 @@ const SignUp: React.FC<{setToken:Object}> = ({setToken} : any) => {
               Sign Up
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+              />
               <TextField
                 margin="normal"
                 required
