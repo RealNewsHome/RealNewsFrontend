@@ -8,7 +8,7 @@ import SignUp from "./components/SignUp";
 import PropTypes from 'prop-types';
 
 
-const RouteList: React.FC<{setToken:Object}> = ({setToken} : any) => {
+const RouteList: React.FC<{setToken:Object, setUserId:Object, setUsername:Object}> = ({ setToken, setUserId, setUsername } : any) => {
   return (
     <Routes>
       <Route path="/post/:ID" element={< SelectedPost />} />

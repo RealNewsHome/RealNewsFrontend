@@ -19,7 +19,8 @@ import SignInSide from './components/SignIn';
 
 function App() {
   const [token, setToken] = useState("");
-
+  const [userId, setUserId] = useState(0);
+  const [username, setUsername] = useState("")
   // if(!token) {
   //   return <SignInSide setToken={setToken} />
   // }
@@ -27,8 +28,8 @@ function App() {
   return (
     <UserContext.Provider value={token}>
     <div className="App" >
-      <Header setToken={setToken}/>
-      <RouteList setToken={setToken}/>
+      <Header setToken={setToken} setUserId={setUserId} setUsername={setUsername}/>
+      <RouteList setToken={setToken} setUserId={setUserId} setUsername={setUsername}/>
     </div>
     </UserContext.Provider>
   );

@@ -18,8 +18,10 @@ import { logout } from './SignIn'
 //   title: string;
 // }
 
-const Header: React.FC<{setToken:Object}> = ({ setToken } : any) => {
-  const token = useContext(UserContext);
+
+const Header: React.FC<{setToken:Object, setUserId:Object, setUsername:Object}> = ({ setToken, setUserId, setUsername } : any) => {
+  const token = window.localStorage.getItem('token');
+  //use token to get id ...
 
   return (
     <React.Fragment>
