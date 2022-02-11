@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useParams } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
@@ -12,6 +12,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Header from './Header';
 import { Link } from 'react-router-dom';
 import SelectedPost from './Post';
+import {UserContext} from '../context'
 
 interface Post {
   Text: string;
@@ -32,6 +33,9 @@ export default function UserProfile() {
   let [isLoading, setIsLoading] = useState(false);
   let [user, setUser] = useState<User>()
   let [posts, setPosts] = useState<Post[]>([])
+
+  const contextObj = useContext(UserContext);
+  console.log('hi im the user', contextObj)
 
     useEffect(() => {
     setIsLoading(true)

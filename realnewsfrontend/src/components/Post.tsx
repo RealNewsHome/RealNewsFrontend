@@ -5,7 +5,8 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
-import axios from 'axios'
+import axios from 'axios';
+import {UserContext} from '../context'
 
 interface Post {
     Text: string;

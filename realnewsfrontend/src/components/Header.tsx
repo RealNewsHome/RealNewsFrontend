@@ -21,15 +21,28 @@ import { logout } from './SignIn'
 
 const Header: React.FC<{setToken:Object, setUserId:Object, setUsername:Object}> = ({ setToken, setUserId, setUsername } : any) => {
   const token = window.localStorage.getItem('token');
+  const userInfo = useContext(UserContext)
+  let userId;
+
+  if(userInfo.userId) {
+    userId = userInfo.userId;
+  }
+
+  // if(token && Object.keys(userInfo).length > 0) {
+  //   userId = userInfo.userId
+  // }
   //use token to get id ...
 
+  //if token, then we .. are logged in & can get user id etc etc .. can logout & set all that good stuff to nada
   return (
     <React.Fragment>
       <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
       <Link to={`/posts`}>
         <Button size="small">Home</Button>
-        </Link>
+      </Link>
+      <Link to={`/posts/byUser/${userId}`}>
         <Button size="small">My Profile</Button>
+      </Link>
         <Typography
           component="h2"
           variant="h5"
