@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -6,6 +6,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {UserContext} from '../context';
+import axios from 'axios';
+import { logout } from './SignIn'
 
 // interface HeaderProps {
 //   sections: ReadonlyArray<{
@@ -16,7 +19,7 @@ import PropTypes from 'prop-types';
 // }
 
 const Header: React.FC<{setToken:Object}> = ({ setToken } : any) => {
-
+  const token = useContext(UserContext);
 
   return (
     <React.Fragment>
@@ -38,7 +41,7 @@ const Header: React.FC<{setToken:Object}> = ({ setToken } : any) => {
         <IconButton>
           <SearchIcon />
         </IconButton>
-        <Button variant="outlined" size="small" onClick={() => setToken("")}>
+        <Button variant="outlined" size="small" onClick={() => logout()}>
           Logout
         </Button>
         <Link to="/signUp">

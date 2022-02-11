@@ -27,7 +27,9 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 const TOKEN = 'token';
-
+export const logout = () => {
+  window.localStorage.removeItem(TOKEN);
+};
 
 const SignInSide: React.FC<{setToken:Object}> = ({setToken} : any) => {
   const [email, setEmail] = useState("");
