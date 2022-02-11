@@ -27,8 +27,12 @@ function App() {
   //   return <SignInSide setToken={setToken} />
   // }
 
+  // <MyContext.Provider
+  // value={{ value: [value, setValue], value2: [value2, setValue2] }}
+
+
   return (
-    <UserContext.Provider value={token}>
+    <UserContext.Provider value={{token, userId, username}}>
     <div className="App" >
       <Header setToken={setToken} setUserId={setUserId} setUsername={setUsername}/>
       <RouteList setToken={setToken} setUserId={setUserId} setUsername={setUsername}/>
