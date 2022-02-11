@@ -19,8 +19,10 @@ import SignInSide from './components/SignIn';
 
 function App() {
   const [token, setToken] = useState("");
-  const [userId, setUserId] = useState(0);
-  const [username, setUsername] = useState("")
+  const [userId, setUserId] = useState<Number>();
+  const [username, setUsername] = useState("");
+
+  console.log('THIS IS MY USERNAME!!', username, 'THIS IS MY USERID', userId)
   // if(!token) {
   //   return <SignInSide setToken={setToken} />
   // }

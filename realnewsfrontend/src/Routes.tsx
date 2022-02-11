@@ -15,8 +15,8 @@ const RouteList: React.FC<{setToken:Object, setUserId:Object, setUsername:Object
       <Route path="/" element={<Newsfeed />} />
       <Route path="/posts" element={<Newsfeed />} />
       <Route path="/posts/byUser/:ID" element={<UserProfile />} />
-      <Route path="/signIn" element={<SignIn setToken={setToken}/>} />
-      <Route path="/signUp" element={<SignUp setToken={setToken}/>} />
+      <Route path="/signIn" element={<SignIn setToken={setToken} setUserId={setUserId} setUsername={setUsername}/>} />
+      <Route path="/signUp" element={<SignUp setToken={setToken} setUserId={setUserId} setUsername={setUsername}/>} />
     </Routes>
   )
 }

@@ -27,15 +27,16 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 const TOKEN = 'token';
+
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
 };
 
-const SignInSide: React.FC<{setToken:Object}> = ({setToken} : any) => {
-  const [email, setEmail] = useState("");
+const SignInSide: React.FC<{setToken:Object, setUserId:OES_element_index_uint, setUsername:Object}> = ({setToken, setUserId, setUsername} : any) => {
+  // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [userId, setUserId] = useState<Number>();
+  // const [username, setUsername] = useState("");
+  // const [userId, setUserId] = useState<Number>();
   const navigate = useNavigate();
 
   async function loginThunk(email: FormDataEntryValue | null, password: FormDataEntryValue | null) {
@@ -59,7 +60,7 @@ const SignInSide: React.FC<{setToken:Object}> = ({setToken} : any) => {
       //now ... set auth & state for the whole app
       setUserId(data.ID);
       setUsername(data.Username);
-      setEmail(data.Email);
+      // setEmail(data.Email);
     }
   }
 
@@ -156,7 +157,9 @@ const SignInSide: React.FC<{setToken:Object}> = ({setToken} : any) => {
 }
 
 SignInSide.propTypes = {
-  setToken: PropTypes.func.isRequired
+  setToken: PropTypes.func.isRequired,
+  setUserId: PropTypes.func.isRequired,
+  setUsername: PropTypes.func.isRequired,
 }
 
 export default SignInSide;
