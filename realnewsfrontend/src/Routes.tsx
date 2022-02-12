@@ -6,6 +6,7 @@ import UserProfile from "./components/UserProfile";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import PropTypes from 'prop-types';
+import NewPostForm from "./components/CreatePost";
 
 
 const RouteList: React.FC<{setToken:Object, setUserId:Object, setUsername:Object}> = ({ setToken, setUserId, setUsername } : any) => {
@@ -17,6 +18,7 @@ const RouteList: React.FC<{setToken:Object, setUserId:Object, setUsername:Object
       <Route path="/posts/byUser/:ID" element={<UserProfile />} />
       <Route path="/signIn" element={<SignIn setToken={setToken} setUserId={setUserId} setUsername={setUsername}/>} />
       <Route path="/signUp" element={<SignUp setToken={setToken} setUserId={setUserId} setUsername={setUsername}/>} />
+      <Route path="/newPost" element={<NewPostForm />}/>
     </Routes>
   )
 }

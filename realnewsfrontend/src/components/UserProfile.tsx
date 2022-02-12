@@ -29,24 +29,27 @@ interface User {
 
 export default function UserProfile() {
   const { ID } = useParams()
+  console.log('here is my ID sir', ID)
 
   let [isLoading, setIsLoading] = useState(false);
   let [user, setUser] = useState<User>()
   let [posts, setPosts] = useState<Post[]>([])
 
   const contextObj = useContext(UserContext);
-  console.log('hi im the user', contextObj)
+  async function getUsersPosts() {
+    const { data } = await axios.get(`http://localhost:8080/posts/byUser/${ID}`);
+    console.log('this is data', data)
+    setPosts(data)
+  }
 
     useEffect(() => {
-    setIsLoading(true)
-    axios.get(`http://localhost:8080/posts/byUser/${ID}`)
-    .then(function (response) {
-      setPosts(response.data)
-    })
-    setIsLoading(false)
-  }, [posts])
+    setIsLoading(true);
+    getUsersPosts();
+    setIsLoading(false);
+  }, [])
 
   useEffect(() => {
+    console.log('ID IN USE EFFECT', ID)
     setIsLoading(true)
       axios.get(`http://localhost:8080/users/${ID}`)
       .then(function (response) {
@@ -59,7 +62,13 @@ export default function UserProfile() {
     return (
       <></>
     )
-  }
+    }
+
+    if(posts.length === 0) {
+      return (
+    <h1>{user?.Username} has no posts yet!</h1>
+      )
+    }
 
   return (
     <>
