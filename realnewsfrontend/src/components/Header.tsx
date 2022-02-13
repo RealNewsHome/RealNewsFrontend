@@ -10,14 +10,6 @@ import {UserContext} from '../context';
 import axios from 'axios';
 import { logout } from './SignIn'
 
-// interface HeaderProps {
-//   sections: ReadonlyArray<{
-//     title: string;
-//     url: string;
-//   }>;
-//   title: string;
-// }
-
 
 const Header: React.FC<{setToken:Object, setUserId:Object, setUsername:Object}> = ({ setToken, setUserId, setUsername } : any) => {
   const token = window.localStorage.getItem('token');
@@ -28,12 +20,6 @@ const Header: React.FC<{setToken:Object, setUserId:Object, setUsername:Object}> 
     userId = userInfo.userId;
   }
 
-  // if(token && Object.keys(userInfo).length > 0) {
-  //   userId = userInfo.userId
-  // }
-  //use token to get id ...
-
-  //if token, then we .. are logged in & can get user id etc etc .. can logout & set all that good stuff to nada
   return (
     <React.Fragment>
       <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -42,6 +28,9 @@ const Header: React.FC<{setToken:Object, setUserId:Object, setUsername:Object}> 
       </Link>
       <Link to={`/posts/byUser/${userId}`}>
         <Button size="small">My Profile</Button>
+      </Link>
+      <Link to={`/newPost`}>
+        <Button size="small">New Post</Button>
       </Link>
         <Typography
           component="h2"

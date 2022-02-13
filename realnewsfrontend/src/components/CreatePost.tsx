@@ -14,16 +14,44 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { UserContext } from "../context";
 
 const NewPostForm = () => {
   const token = window.localStorage.getItem('token');
+  let [draft, setDraft] = useState("")
+
+
+  const userInfo = useContext(UserContext)
+  let userId: Number;
+
   if(!token) {
     return (
       <h1>Please Sign Up or Sign In to Post</h1>
     )
   }
 
-  // async function createPost
+  if(userInfo.userId) {
+    userId = userInfo.userId;
+  }
+
+  async function newPostThunk(title: FormDataEntryValue | null, text: FormDataEntryValue | null, userId: Number | null) {
+    let res = await axios.post('http://localhost:8080/post', {
+      title,
+      text,
+      userId
+    })
+    console.log('we need to update post state', res)
+  }
+
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    let text = data.get('text');
+    let title = data.get('title')
+    newPostThunk(title, text, userId)
+  };
+
   function Copyright(props: any) {
     return (
       <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -53,19 +81,28 @@ const NewPostForm = () => {
             }}
           >
 
-            <Box component="form" noValidate sx={{ mt: 1 }}>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="post"
+                id="title"
+                label="Title:"
+                name="title"
+                autoComplete="title"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="text"
                 label="Enter your post here:"
-                name="post"
-                autoComplete="post"
+                name="text"
+                autoComplete="text"
                 autoFocus
                 multiline={true}
               />
-
 
               <Button
                 type="submit"
@@ -85,4 +122,3 @@ const NewPostForm = () => {
 
 export default NewPostForm
 
-//we need ... to check if token .. if there is a token, & curuser ... allow them to make a post request via axios .. create a form
