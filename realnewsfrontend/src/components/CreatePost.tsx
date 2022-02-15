@@ -15,10 +15,16 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { UserContext } from "../context";
+// import { useForm } from "react-hook-form";
+// import FileInput from "./FileInput";
 
 const NewPostForm = () => {
   const token = window.localStorage.getItem('token');
-  let [draft, setDraft] = useState("")
+  // const { register } = useForm()
+  const [draft, setDraft] = useState("")
+  const [imageUrl, setImageUrl] = useState<File | string>()
+  const [selectedImage, setSelectedImage] = useState<File | null>()
+
 
 
   const userInfo = useContext(UserContext)
@@ -34,6 +40,7 @@ const NewPostForm = () => {
     userId = userInfo.userId;
   }
 
+
   async function newPostThunk(title: FormDataEntryValue | null, text: FormDataEntryValue | null, userId: Number | null) {
     let res = await axios.post('http://localhost:8080/post', {
       title,
@@ -43,6 +50,11 @@ const NewPostForm = () => {
     console.log('we need to update post state', res)
   }
 
+  const fileChangedHandler = (e : React.ChangeEvent<HTMLInputElement>) => {
+    let eventFiles = (e?.target as HTMLInputElement)?.files?.[0];
+    setSelectedImage(eventFiles)
+    console.log(selectedImage)
+  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -103,7 +115,20 @@ const NewPostForm = () => {
                 autoFocus
                 multiline={true}
               />
-
+               <>
+  <input
+    accept="image/*"
+    type="file"
+    id="select-image"
+    style={{ display: 'none' }}
+    onChange={e => fileChangedHandler(e)}
+  />
+  <label htmlFor="select-image">
+    <Button variant="contained" color="primary" component="span">
+      Upload Image
+    </Button>
+  </label>
+</>
               <Button
                 type="submit"
                 fullWidth
