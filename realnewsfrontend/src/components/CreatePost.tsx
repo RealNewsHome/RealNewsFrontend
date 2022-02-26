@@ -48,6 +48,10 @@ const NewPostForm = () => {
     )
   }
 
+  if(!location) {
+    return <h1>You must share location to post</h1>
+  }
+
   if(userInfo.userId) {
     userId = userInfo.userId;
   }
