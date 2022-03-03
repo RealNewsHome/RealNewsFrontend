@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import axios from 'axios';
 import {UserContext} from '../context'
 
@@ -77,6 +78,7 @@ export default function SelectedPost() {
                 <Typography variant="h5" color="inherit" paragraph>
                   Upvotes:{post?.Upvotes}
                 </Typography>
+                <Button variant="contained">Upvote</Button>
                 {/* <Link variant="subtitle1" href="#">
                   {post.linkText}
                 </Link> */}
