@@ -12,6 +12,7 @@ interface Post {
     Text: string;
     Title: string;
     ID: number;
+    Upvotes: number;
 }
 
 export default function SelectedPost() {
@@ -72,6 +73,9 @@ export default function SelectedPost() {
                 </Typography>
                 <Typography variant="h5" color="inherit" paragraph>
                   {post?.Text}
+                </Typography>
+                <Typography variant="h5" color="inherit" paragraph>
+                  Upvotes:{post?.Upvotes}
                 </Typography>
                 {/* <Link variant="subtitle1" href="#">
                   {post.linkText}
