@@ -27,14 +27,12 @@ const NewPostForm = () => {
   const [location, setLocation] = useState <number[]>()
 
   if ('geolocation' in navigator) {
-    console.log('geolocation available');
     navigator.geolocation.getCurrentPosition(function (position) {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
       setLocation([lat, lon]);
     });
   } else {
-    console.log('geolocation not available');
     alert('You must share location to post')
   }
 
@@ -68,6 +66,7 @@ const NewPostForm = () => {
   const fileChangedHandler = (e : React.ChangeEvent<HTMLInputElement>) => {
     let eventFiles = (e?.target as HTMLInputElement)?.files?.[0];
     setSelectedImage(eventFiles)
+    console.log('here are the files you asked for', eventFiles)
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

@@ -23,7 +23,8 @@ import {UserContext} from '../context'
 interface Post {
   Title: string,
   ID: number,
-  Text: string
+  Text: string,
+  Upvotes: number
 }
 
 export default function Newsfeed() {
@@ -36,7 +37,8 @@ export default function Newsfeed() {
     axios.get('http://localhost:8080/posts')
     .then(function (response) {
       // handle success
-      setPosts(response.data)
+      let sortedPosts = response.data.sort((a: Post, b : Post) => b.Upvotes - a.Upvotes)
+      setPosts(sortedPosts)
     })
     setIsLoading(false)
   }, [])
