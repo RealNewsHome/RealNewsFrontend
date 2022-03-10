@@ -49,7 +49,6 @@ export default function UserProfile() {
   }, [])
 
   useEffect(() => {
-    console.log('ID IN USE EFFECT', ID)
     setIsLoading(true)
       axios.get(`http://localhost:8080/users/${ID}`)
       .then(function (response) {
