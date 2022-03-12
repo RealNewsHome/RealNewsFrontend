@@ -23,7 +23,7 @@ const NewPostForm = () => {
   // const { register } = useForm()
   const [draft, setDraft] = useState("")
   const [imageUrl, setImageUrl] = useState<File | string>()
-  const [selectedImage, setSelectedImage] = useState<File | null>()
+  const [selectedImage, setSelectedImage] = useState<string | Blob >()
   const [location, setLocation] = useState <number[]>()
 
   if ('geolocation' in navigator) {
@@ -48,6 +48,8 @@ const NewPostForm = () => {
 
   if(!location) {
     return <h1>You must share location to post</h1>
+  } else if(location[0] > 41 || location[0] < 40.47 || location[1] > -73.7 || location[1] < -74.3) {
+    return <h1>You must be in New York City to post about New York City.</h1>
   }
 
   if(userInfo.userId) {
@@ -56,17 +58,46 @@ const NewPostForm = () => {
 
 
   async function newPostThunk(title: FormDataEntryValue | null, text: FormDataEntryValue | null, userId: Number | null) {
-    let res = await axios.post('http://localhost:8080/post', {
-      title,
-      text,
-      userId
-    })
+    //convert the image ... to string here ?
+
+    // let image = null;
+
+    // if(selectedImage) {
+    //   image = uploadFile();
+    // }
+      let res = await uploadFile()
+      console.log(res)
+    // let res = await axios.post('http://localhost:8080/post', {
+    //   title,
+    //   text,
+    //   userId,
+    //   image
+    // })
+  }
+
+  async function uploadFile() {
+    try {
+      const formData = new FormData();
+      if(selectedImage) {
+        formData.append("select-image", selectedImage);
+        const res = await axios.post('http://localhost:8080/uploadFile', formData);
+        if(res.data.data) {
+          console.log(res.data, 'upload success!');
+        }
+      }
+    } catch(error) {
+      console.log(error)
+    } finally {
+      console.log("we did it boys")
+    }
+    // let result = await axios.post('http://localhost:8080/uploadFile')
+    // console.log(result)
   }
 
   const fileChangedHandler = (e : React.ChangeEvent<HTMLInputElement>) => {
     let eventFiles = (e?.target as HTMLInputElement)?.files?.[0];
-    setSelectedImage(eventFiles)
-    console.log('here are the files you asked for', eventFiles)
+    let eventStr = eventFiles as string | Blob
+    setSelectedImage(eventStr)
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
