@@ -35,7 +35,7 @@ export default function SelectedPost() {
 
   async function upvotePost() {
     let { data } = await axios.put(`http://localhost:8080/post/${ID}`)
-    console.log('this is pete datason', data)
+    console.log('this is pete datason',)
     setPost(data)
   }
 
@@ -67,7 +67,7 @@ export default function SelectedPost() {
               backgroundColor: 'rgba(0,0,0,.3)',
             }}
           />
-          <Grid container>
+          <Grid container justifyContent={'center'}>
             <Grid item md={6}>
               <Box
                 sx={{
