@@ -35,8 +35,10 @@ const Header: React.FC<{setToken:Object, setUserId:Object, setUsername:Object}> 
         <Typography
           component="h2"
           variant="h5"
-          color="inherit"
+          color="black"
           align="center"
+          fontWeight={"bold"}
+          fontFamily={"American Typewriter"}
           noWrap
           sx={{ flex: 1 }}
         >
