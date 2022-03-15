@@ -44,11 +44,11 @@ export default function Newsfeed() {
   }, [])
 
   return (
-    <div>
+    <div id="newsfeed">
       {
         posts.map((post: Post) => {
           return (
-            <Grid item xs={12} md={6} key={post.ID} >
+            <Grid item key={post.ID} marginRight={20} marginLeft={20} >
               <Link to={`/post/${post.ID}`}>
             <CardActionArea component="a" href="#">
               <Card sx={{ display: 'flex' }}>

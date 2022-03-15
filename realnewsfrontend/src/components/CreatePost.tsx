@@ -81,6 +81,7 @@ const NewPostForm = () => {
       if(selectedImage) {
         formData.append("select-image", selectedImage);
         const res = await axios.post('http://localhost:8080/uploadFile', formData);
+        console.log('this is res' ,res)
         if(res.data.data) {
           console.log(res.data, 'upload success!');
         }
