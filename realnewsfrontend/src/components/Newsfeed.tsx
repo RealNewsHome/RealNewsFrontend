@@ -21,10 +21,11 @@ import {Link } from 'react-router-dom'
 import {UserContext} from '../context'
 
 interface Post {
-  Title: string,
-  ID: number,
-  Text: string,
-  Upvotes: number
+  Title: string;
+  ID: number;
+  Text: string;
+  Upvotes: number;
+  Image: string;
 }
 
 export default function Newsfeed() {
@@ -47,6 +48,7 @@ export default function Newsfeed() {
     <div id="newsfeed">
       {
         posts.map((post: Post) => {
+          const image = post?.Image ? `./${post.Image}` : "./temp-images/upload-530817856.png"
           return (
             <Grid item key={post.ID} marginRight={20} marginLeft={20} >
               <Link to={`/post/${post.ID}`}>
@@ -66,6 +68,7 @@ export default function Newsfeed() {
                 <CardMedia
                   component="img"
                   sx={{ width: 160, display: { xs: 'none', sm: 'block' } }}
+                  src={require(`${image}`)}
                 />
               </Card>
             </CardActionArea>

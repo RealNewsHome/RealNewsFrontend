@@ -39,13 +39,12 @@ export default function SelectedPost() {
     setPost(data)
   }
 
-  const image = post?.Image ? `./${post.Image}` : "./public/upload-854775037.png"
+  const image = post?.Image ? `./${post.Image}` : "./temp-images/upload-530817856.png"
 
   if(isLoading) {
     return <div/>
   } else {
     console.log(post)
-    console.log("IMAGE", image)
   return (
     <div>
         <Paper
