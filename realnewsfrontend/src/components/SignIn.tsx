@@ -70,6 +70,7 @@ const SignInSide: React.FC<{setToken:Object, setUserId:OES_element_index_uint, s
     // eslint-disable-next-line no-console
     let emailData = data.get('email');
     let password = data.get('password');
+    console.log("here is emailData", emailData, password)
     loginThunk(emailData, password)
   };
 

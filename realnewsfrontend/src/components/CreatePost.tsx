@@ -60,19 +60,20 @@ const NewPostForm = () => {
   async function newPostThunk(title: FormDataEntryValue | null, text: FormDataEntryValue | null, userId: Number | null) {
     //convert the image ... to string here ?
 
-    // let image = null;
+    let image = null;
 
-    // if(selectedImage) {
-    //   image = uploadFile();
-    // }
-      let res = await uploadFile()
-      console.log(res)
-    // let res = await axios.post('http://localhost:8080/post', {
-    //   title,
-    //   text,
-    //   userId,
-    //   image
-    // })
+    if(selectedImage) {
+      image = await uploadFile();
+    }
+
+    let res = await axios.post('http://localhost:8080/post', {
+      title,
+      text,
+      userId,
+      image
+    })
+
+    console.log('post created: ', res.data)
   }
 
   async function uploadFile() {
@@ -81,15 +82,13 @@ const NewPostForm = () => {
       if(selectedImage) {
         formData.append("select-image", selectedImage);
         const res = await axios.post('http://localhost:8080/uploadFile', formData);
-        console.log('this is res' ,res)
-        if(res.data.data) {
-          console.log(res.data, 'upload success!');
-        }
+          // console.log('this is the response from uploadFILE', res.data);
+          return res.data
       }
     } catch(error) {
       console.log(error)
     } finally {
-      console.log("we did it boys")
+      console.log("uploaded")
     }
     // let result = await axios.post('http://localhost:8080/uploadFile')
     // console.log(result)
@@ -106,6 +105,7 @@ const NewPostForm = () => {
     const data = new FormData(event.currentTarget);
     let text = data.get('text');
     let title = data.get('title')
+    console.log('title', title, 'text', text)
     newPostThunk(title, text, userId)
   };
 

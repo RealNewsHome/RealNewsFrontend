@@ -15,6 +15,7 @@ interface Post {
     Title: string;
     ID: number;
     Upvotes: number;
+    Image: string;
 }
 
 export default function SelectedPost() {
@@ -35,14 +36,18 @@ export default function SelectedPost() {
 
   async function upvotePost() {
     let { data } = await axios.put(`http://localhost:8080/post/${ID}`)
-    console.log('this is pete datason',)
     setPost(data)
   }
+
+  const image = post?.Image ? `./${post.Image}` : "./public/upload-854775037.png"
 
   if(isLoading) {
     return <div/>
   } else {
+    console.log(post)
+    console.log("IMAGE", image)
   return (
+    <div>
         <Paper
           sx={{
             position: 'relative',
@@ -52,11 +57,10 @@ export default function SelectedPost() {
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
-            // backgroundImage: `url(${post.image})`,
+            backgroundImage: post?.Image
           }}
         >
           {/* Increase the priority of the hero background image */}
-          {/* {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />} */}
           <Box
             sx={{
               position: 'absolute',
@@ -76,6 +80,7 @@ export default function SelectedPost() {
                   pr: { md: 0 },
                 }}
               >
+                <img src={require(`${image}`)} />
                 <Typography component="h1" variant="h3" color="inherit" gutterBottom>
                   {post?.Title}
                 </Typography>
@@ -93,6 +98,7 @@ export default function SelectedPost() {
             </Grid>
           </Grid>
         </Paper>
+      </div>
       );
               }
 }

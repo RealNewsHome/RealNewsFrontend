@@ -78,7 +78,7 @@ export default function UserProfile() {
           return (
             <Grid item xs={12} md={6} key={post.ID} >
               <Link to={`/post/${post.ID}`}>
-            <CardActionArea component="a" href="#">
+            <CardActionArea component="a" href="#" >
               <Card sx={{ display: 'flex' }}>
                 <CardContent sx={{ flex: 1 }}>
                   <Typography component="h2" variant="h5">
